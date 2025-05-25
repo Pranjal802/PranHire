@@ -21,9 +21,9 @@ const Login = () => {
     // Example: console.log(form);
   };
 
-  const handleRegisterRedirect = (e) => {
+  const handleSignupRedirect = (e) => {
     e.preventDefault();
-    navigate("/register");
+    navigate("/signup");
   };
 
   return (
@@ -72,7 +72,7 @@ const Login = () => {
         <div className="mt-4 text-center text-sm text-gray-500">
           Don't have an account?{" "}
           <button
-            onClick={handleRegisterRedirect}
+            onClick={handleSignupRedirect}
             className="text-blue-600 hover:underline bg-transparent border-none p-0 m-0 cursor-pointer"
             type="button"
           >

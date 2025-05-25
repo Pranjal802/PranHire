@@ -3,6 +3,7 @@ import connectDB from "./Database/index.js";
 import app from "./App.js";
 import authRoutes from "./Routes/auth.js";
 import express from "express";
+import cookieParser from "cookie-parser";
 
 dotenv.config({ path: "./.env" });
 
@@ -18,4 +19,5 @@ connectDB()
   });
 
   app.use(express.json()); // Middleware to parse JSON requests
+  app.use(cookieParser()); // Middleware to parse cookies
   app.use('/api/auth', authRoutes);

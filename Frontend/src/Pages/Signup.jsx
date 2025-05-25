@@ -1,6 +1,15 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useDispatch } from "react-redux";
+import { signup as signupAction } from "../Features/Auth/authSlice";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Signup = () => {
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -13,39 +22,81 @@ const Register = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleRegisterUser = (e) => {
+  const handleRegisterUser = async (e) => {
 
-    fetch("http://localhost:8000/api/v1/user/register", {
-        headers: {
-            contentType: "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify({
-            name,
-            email,
-            password,
-        })
-    })
 
     e.preventDefault();
-    if (!form.name || !form.email || !form.password || !form.confirmPassword) {
-      setError("Please fill in all fields.");
-      return;
-    }
-    if (form.password !== form.confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
-    setError("");
-    // Add your registration logic here (API call, etc.)
-  };
+  if (!form.name || !form.email || !form.password || !form.confirmPassword) {
+    setError("Please fill in all fields.");
+    return;
+  }
+  if (form.password !== form.confirmPassword) {
+    setError("Passwords do not match.");
+    return;
+  }
+  setError("");
 
-  return (
-    <div className="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-blue-700 mb-6 text-center">
-          Register for <span className="text-blue-500">PranHire</span>
-        </h2>
+
+
+    // fetch("http://localhost:8000/api/v1/user/register", {
+    //     headers: {
+    //         contentType: "application/json",
+    //     },
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //         name,
+    //         email,
+    //         password,
+    //     })
+    // })
+
+  try {
+    const response = await fetch("http://localhost:8000/api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: form.name,
+        email: form.email,
+        password: form.password,
+      }),
+    });
+
+    const data = await response.json();
+    if(response.ok) {
+       toast.success("Registration successful! Please check your email for verification.");
+       navigate("/dashboard")
+       dispatch(signupAction(data.newUser));
+      //  dispatch(loginSuccess({ user: response.data.user, token: response.data.token }))
+
+       setForm({
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+       });
+
+      // Optionally, redirect after a delay:
+    } else {
+      setError(data.message || "Registration failed.");
+      toast.error(data.message || "Registration failed.");
+    }
+    // You can handle the response here, e.g.:
+    // const data = await response.json();
+    // if (!response.ok) setError(data.message || "Registration failed.");
+    } catch (err) {
+      setError("An error occurred during registration.");
+    }
+  };
+  
+    return (
+      <div className="min-h-[70vh] flex items-center justify-center bg-gradient-to-br from-blue-50 to-blue-100">
+        <ToastContainer position="top-right" autoClose={3000} />
+        <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+          <h2 className="text-3xl font-bold text-blue-700 mb-6 text-center">
+            Register for <span className="text-blue-500">PranHire</span>
+          </h2>
 
 
         <form onSubmit={handleRegisterUser} className="space-y-5">
@@ -120,4 +171,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Signup;
