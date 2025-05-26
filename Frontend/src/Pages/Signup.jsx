@@ -66,10 +66,14 @@ const Signup = () => {
     const data = await response.json();
     if(response.ok) {
        toast.success("Registration successful! Please check your email for verification.");
-       navigate("/dashboard")
+       //navigate("/dashboard")
+       navigate("/emailverification")
        dispatch(signupAction(data.newUser));
       //  dispatch(loginSuccess({ user: response.data.user, token: response.data.token }))
-
+      dispatch(loginSuccess({ user: data.user, token: data.token }));
+      if (data.token) {
+          localStorage.setItem("token", data.token);
+        }
        setForm({
         name: "",
         email: "",

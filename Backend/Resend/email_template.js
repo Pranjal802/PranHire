@@ -73,7 +73,7 @@ export const sendWelcomeEmailTemplate =  `
             <img
               alt="PranHire"
               height="50"
-              src="https://yourdomain.com/logo.png"
+              src="https://PranHire.com/logo.png"
               style="display:block;outline:none;border:none;text-decoration:none;margin:0 auto"
               width="170" />
             <p style="font-size:16px;line-height:26px;margin-top:16px;margin-bottom:16px">

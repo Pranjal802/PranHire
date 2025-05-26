@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { useSelector, useDispatch } from 'react-redux';
-// import { logout } from '../features/auth/authSlice';
+import { logout } from '../Features/Auth/authSlice.js';
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,18 +21,23 @@ const Header = () => {
     <header className="bg-white shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <h1 className="text-xl font-bold text-blue-600">PranHire</h1>
-        <nav className="hidden md:flex space-x-6">
-          <Link to="/dashboard" className="hover:text-blue-600">Dashboard</Link>
-          <Link to="/upload" className="hover:text-blue-600">Resume Upload</Link>
-          <Link to="/tracker" className="hover:text-blue-600">Job Tracker</Link>
-          <Link to="/assistant" className="hover:text-blue-600">AI Assistant</Link>
-          <Link to="/profile" className="hover:text-blue-600">Profile</Link>
+        <div>
           {isAuth ? (
-            <button onClick={handleLogout} className="text-red-600 hover:underline">Logout</button>
+            <nav className="hidden md:flex space-x-6">
+              <Link to="/dashboard" className="hover:text-blue-600">Dashboard</Link>
+              <Link to="/upload" className="hover:text-blue-600">Resume Upload</Link>
+              <Link to="/tracker" className="hover:text-blue-600">Job Tracker</Link>
+              <Link to="/assistant" className="hover:text-blue-600">AI Assistant</Link>
+              <Link to="/profile" className="hover:text-blue-600">Profile</Link>
+              <button onClick={handleLogout} className="text-red-600 hover:underline">Logout</button>
+            </nav>  
           ) : (
-            <Link to="/login" className="text-green-600 hover:underline">Login</Link>
+            <nav className="hidden md:flex space-x-6"> 
+              <Link to="/login" className="text-green-600 hover:underline">Login</Link>
+              <Link to="/signup" className="text-green-600 hover:underline">Signup</Link>
+            </nav>
           )}
-        </nav>
+        </div>
         <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X /> : <Menu />}
         </button>

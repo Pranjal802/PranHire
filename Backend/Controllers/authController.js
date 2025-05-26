@@ -129,7 +129,7 @@ export const login = async(req, res) => {
                 return res.status(400).json({ success: false, message: "Please verify your email before logging in" });
             }
 
-            generateJwtToken(res, user._id);
+            const token = generateJwtToken(res, user._id);
 
             return res.status(200).json({
                 success: true,
@@ -137,7 +137,8 @@ export const login = async(req, res) => {
                 user: {
                     ...user._doc,
                     password: undefined,
-                }
+                },
+                token
             });
 
         } catch (error) {
@@ -226,7 +227,7 @@ export const emailverification = async(req, res) => {
         }
 };
 
-export const checkAuth = async(req, res) => {
+export const checkauth = async(req, res) => {
     try {
        const user =await User.findById(req.userId)
         if (!user) {

@@ -23,7 +23,7 @@ export const sendWelcomeEmail = async(email, name) => {
         from: "Acme <onboarding@resend.dev>",
         to: [email], // email associated with resent account
         subject: "Welcome to PranHire...!!",
-        html: sendWelcomeEmailTemplate.replace("{{name}}", name),
+        html: sendWelcomeEmailTemplate.replace("{name}", name),
         });
     } catch (error) {
         console.error("Error sending welcome email:", error);

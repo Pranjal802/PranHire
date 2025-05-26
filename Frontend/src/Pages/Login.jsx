@@ -1,24 +1,59 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../Features/Auth/authSlice";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add your login logic here (API call, validation, etc.)
+
     if (!form.email || !form.password) {
       setError("Please fill in all fields.");
       return;
     }
-    setError("");
-    // Example: console.log(form);
+
+    try {
+      const response = await fetch("http://localhost:8000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: form.email,
+          password: form.password,
+        }),
+      });
+
+      const data = await response.json();
+      console.log("Login response:", data);
+
+      const token = data.token;
+      const user = data.user;
+
+      if (response.ok && token && user) {
+        // Dispatch login with token and user
+        dispatch(login({ user, token }));
+
+        toast.success("Login successful!");
+        navigate("/dashboard");
+      } else {
+        const msg = data.message || "Login failed.";
+        setError(msg);
+        toast.error(msg);
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.");
+      toast.error("An error occurred. Please try again.");
+    }
   };
 
   const handleSignupRedirect = (e) => {
@@ -79,6 +114,7 @@ const Login = () => {
             Register
           </button>
         </div>
+        <ToastContainer position="top-right" autoClose={3000} />
       </div>
     </div>
   );
