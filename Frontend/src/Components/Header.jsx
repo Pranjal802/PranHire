@@ -25,7 +25,7 @@ const Header = () => {
           {isAuth ? (
             <nav className="hidden md:flex space-x-6">
               <Link to="/dashboard" className="hover:text-blue-600">Dashboard</Link>
-              <Link to="/upload" className="hover:text-blue-600">Resume Upload</Link>
+              <Link to="/resume-upload" className="hover:text-blue-600">Resume Upload</Link>
               <Link to="/tracker" className="hover:text-blue-600">Job Tracker</Link>
               <Link to="/assistant" className="hover:text-blue-600">AI Assistant</Link>
               <Link to="/profile" className="hover:text-blue-600">Profile</Link>

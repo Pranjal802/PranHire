@@ -4,6 +4,7 @@ import cookieParser from "cookie-parser";
 import cors from "cors"; // <-- Add this import
 import connectDB from "./Database/index.js";
 import authRoutes from "./Routes/auth.js";
+import resumeRoutes from "./Routes/resume.js"; // Import resume routes
 
 dotenv.config({ path: "./.env" });
 
@@ -18,7 +19,8 @@ app.use(cors({
 // ✅ Middlewares BEFORE routes
 app.use(express.json());
 app.use(cookieParser());
-app.use('/api/auth', authRoutes); // ✅ Routes come after middlewares
+app.use('/api/auth', authRoutes);
+app.use('/api/resume',resumeRoutes) // ✅ Routes come after middlewares
 
 // ✅ Connect DB and Start Server
 connectDB()

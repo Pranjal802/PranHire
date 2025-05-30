@@ -74,6 +74,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { login, logout } from './Features/Auth/authSlice';
+import ResumeUpload from './Pages/ResumeUploadPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -122,6 +123,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/emailverification" element={<EmailVerification />} />
+          <Route path="/resume-upload" element={<ResumeUpload />} />
         </Routes>
       </main>
       <Footer />

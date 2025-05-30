@@ -30,6 +30,10 @@ const userSchema = new mongoose.Schema({
   VarificationExpiresAt: {
       type: Date,
   },
+  resumeUrl: {
+    type: String,
+    default: null,
+  },
 });
 
 const User = mongoose.model("User", userSchema);
