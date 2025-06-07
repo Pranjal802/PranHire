@@ -1,7 +1,7 @@
 import User from "../Models/user.model.js";
 import axios from "axios";
 import cohere from "cohere-ai";
-import pdf from "pdf-parse";
+import { parsePDF } from "../utils/pdf/pdfParser.js";
 
 export const uploadResume = async (req, res) => {
   try {

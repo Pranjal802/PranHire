@@ -5,7 +5,7 @@ import cors from "cors";
 
 app.use(express.json()); // <-- Place middleware here
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "http://localhost:5174"],
   credentials: true, // if you use cookies
 }));
 // Routes

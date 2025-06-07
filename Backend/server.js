@@ -15,7 +15,7 @@ const app = express(); // ✅ Initialize express here
 //   origin: "*" // allow cookies if needed
 // }));
 app.use(cors({
-  origin: "http://localhost:5173", // frontend URL
+  origin: ["http://localhost:5173", "http://localhost:5175"], // allow both frontend URLs
   credentials: true, // allow cookies if needed
 }));
 
