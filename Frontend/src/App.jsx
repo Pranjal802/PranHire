@@ -75,6 +75,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { login, logout } from './Features/Auth/authSlice';
 import ResumeUpload from './Pages/ResumeUploadPage';
+import Profile from './Pages/Profile';
 
 function App() {
   const dispatch = useDispatch();
@@ -124,6 +125,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/emailverification" element={<EmailVerification />} />
           <Route path="/resume-upload" element={<ResumeUpload />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
       </main>
       <Footer />

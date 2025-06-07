@@ -28,7 +28,7 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   VarificationExpiresAt: {
-      type: Date,
+    type: Date,
   },
   resumeUrl: {
     type: String,

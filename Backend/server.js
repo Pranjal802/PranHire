@@ -11,6 +11,9 @@ dotenv.config({ path: "./.env" });
 const app = express(); // ✅ Initialize express here
 
 // ✅ CORS middleware BEFORE other middlewares and routes
+// app.use(cors({
+//   origin: "*" // allow cookies if needed
+// }));
 app.use(cors({
   origin: "http://localhost:5173", // frontend URL
   credentials: true, // allow cookies if needed
@@ -21,6 +24,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/resume',resumeRoutes) // ✅ Routes come after middlewares
+// app.use("/resumes", express.static("uploads/resumes"));
 
 // ✅ Connect DB and Start Server
 connectDB()

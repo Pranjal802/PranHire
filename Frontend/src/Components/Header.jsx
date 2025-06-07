@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <header className="bg-white shadow sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-        <h1 className="text-xl font-bold text-blue-600">PranHire</h1>
+        <h1 className="text-xl font-bold text-blue-600" onClick={ () => { navigate('/dashboard')}}>PranHire</h1>
         <div>
           {isAuth ? (
             <nav className="hidden md:flex space-x-6">
